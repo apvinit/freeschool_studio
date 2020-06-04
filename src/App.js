@@ -4,6 +4,7 @@ import 'antd/dist/antd.css';
 import './index.css'
 
 import MainContent from './MainContent'
+import { Link } from 'react-router-dom';
 
 const { Header, Content, Footer } = Layout
 
@@ -12,7 +13,11 @@ function App() {
     <Layout>
       <Header>
         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
-          <Menu.Item key="1">Categories</Menu.Item>
+          <Menu.Item key="1">
+            <Link to="/categories">
+              Categories
+          </Link>
+          </Menu.Item>
         </Menu>
       </Header>
       <Content style={{ padding: '0 50px' }}>
