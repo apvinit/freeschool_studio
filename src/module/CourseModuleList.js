@@ -13,24 +13,24 @@ export default function CourseModuleList() {
         extra={<AddModule />} />
       <Card style={{ margin: '8px 32px' }}
         headStyle={{ fontSize: '24px' }}
-        title="Integers">
+        title={<Link to={`${location.pathname}/1/lessons`}>Integers</Link>}>
         <Card style={{ marginBottom: '8px' }}>
-          <Link to={`${location.pathname}/1/lessons`} >
+          <Link to={`${location.pathname}/1/lessons/1/contents`} >
             <h3>Addition and Subtraction of integers</h3>
           </Link>
         </Card>
         <Card style={{ marginBottom: '8px' }}>
-          <Link to={`${location.pathname}/1/lessons`} >
+          <Link to={`${location.pathname}/1/lessons/2/contents`} >
             <h3>Multiplication of integers</h3>
           </Link>
         </Card>
         <Card style={{ marginBottom: '8px' }}>
-          <Link to={`${location.pathname}/1/lessons`} >
+          <Link to={`${location.pathname}/1/lessons/3/contents`} >
             <h3>Addition and Subtraction of integers</h3>
           </Link>
         </Card>
         <Card style={{ marginBottom: '8px' }}>
-          <Link to={`${location.pathname}/1/lessons`} >
+          <Link to={`${location.pathname}/1/lessons/5/contents`} >
             <h3>Addition and Subtraction of integers</h3>
           </Link>
         </Card>
@@ -38,24 +38,24 @@ export default function CourseModuleList() {
 
       <Card style={{ margin: '8px 32px' }}
         headStyle={{ fontSize: '24px' }}
-        title="Integers">
+        title={<Link to={`${location.pathname}/2/lessons`}>Calculus</Link>}>
         <Card style={{ marginBottom: '8px' }}>
-          <Link to={`${location.pathname}/1/lessons`} >
+          <Link to={`${location.pathname}/1/lessons/4/contents`} >
             <h3>Addition and Subtraction of integers</h3>
           </Link>
         </Card>
         <Card style={{ marginBottom: '8px' }}>
-          <Link to={`${location.pathname}/1/lessons`} >
+          <Link to={`${location.pathname}/1/lessons/4/contents`} >
             <h3>Multiplication of integers</h3>
           </Link>
         </Card>
         <Card style={{ marginBottom: '8px' }}>
-          <Link to={`${location.pathname}/1/lessons`} >
+          <Link to={`${location.pathname}/1/lessons/4/contents`} >
             <h3>Addition and Subtraction of integers</h3>
           </Link>
         </Card>
         <Card style={{ marginBottom: '8px' }}>
-          <Link to={`${location.pathname}/1/lessons`} >
+          <Link to={`${location.pathname}/1/lessons/5/contents`} >
             <h3>Addition and Subtraction of integers</h3>
           </Link>
         </Card>
@@ -63,24 +63,24 @@ export default function CourseModuleList() {
 
       <Card style={{ margin: '8px 32px' }}
         headStyle={{ fontSize: '24px' }}
-        title="Integers">
+        title={<Link to={`${location.pathname}/3/lessons`}>Geometry</Link>}>
         <Card style={{ marginBottom: '8px' }}>
-          <Link to={`${location.pathname}/1/lessons`} >
+          <Link to={`${location.pathname}/1/lessons/4/contents`} >
             <h3>Addition and Subtraction of integers</h3>
           </Link>
         </Card>
         <Card style={{ marginBottom: '8px' }}>
-          <Link to={`${location.pathname}/1/lessons`} >
+          <Link to={`${location.pathname}/1/lessons/4/contents`} >
             <h3>Multiplication of integers</h3>
           </Link>
         </Card>
         <Card style={{ marginBottom: '8px' }}>
-          <Link to={`${location.pathname}/1/lessons`} >
+          <Link to={`${location.pathname}/1/lessons/4/contents`} >
             <h3>Addition and Subtraction of integers</h3>
           </Link>
         </Card>
         <Card style={{ marginBottom: '8px' }}>
-          <Link to={`${location.pathname}/1/lessons`} >
+          <Link to={`${location.pathname}/1/lessons/5/contents`} >
             <h3>Addition and Subtraction of integers</h3>
           </Link>
         </Card>
