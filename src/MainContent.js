@@ -3,6 +3,9 @@ import { Breadcrumb } from 'antd'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import CategoryList from './category/CategoryList'
 import CategoryCourseList from './course/CategoryCourseList'
+import CourseModuleList from './module/CourseModuleList'
+import ModuleLessonList from './lesson/ModuleLessonList'
+import ContentPage from './content/ContentPage'
 
 export default function MainContent() {
   return (
@@ -19,8 +22,17 @@ export default function MainContent() {
           <Route exact path="/categories">
             <CategoryList />
           </Route>
-          <Route exace path="/categories/:id">
+          <Route exact path="/categories/:id/courses">
             <CategoryCourseList />
+          </Route>
+          <Route exact path="/categories/:id/courses/:courseId/modules">
+            <CourseModuleList />
+          </Route>
+          <Route exact path="/categories/:id/courses/:courseId/modules/:moduleId/lessons">
+            <ModuleLessonList />
+          </Route>
+          <Route exact path="/categories/:id/courses/:courseId/modules/:moduleId/lessons/:contentId">
+            <ContentPage />
           </Route>
         </Switch>
       </div>
