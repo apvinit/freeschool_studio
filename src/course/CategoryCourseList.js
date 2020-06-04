@@ -1,6 +1,7 @@
 import React from 'react'
 import { PageHeader, Card, Avatar, Space, Button } from 'antd'
 import { useLocation, Link } from 'react-router-dom'
+import AddCourse from './AddCourse'
 
 export default function CategoryCourseList() {
   let location = useLocation()
@@ -8,7 +9,7 @@ export default function CategoryCourseList() {
   return (
 
     <>
-      <PageHeader title={title} />
+      <PageHeader title={title} extra={<AddCourse />}/>
 
       <Card style={{ margin: '8px 32px' }} >
         <Avatar size="large" />
