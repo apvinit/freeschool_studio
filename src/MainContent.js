@@ -6,6 +6,7 @@ import CategoryCourseList from './course/CategoryCourseList'
 import CourseModuleList from './module/CourseModuleList'
 import ModuleLessonList from './lesson/ModuleLessonList'
 import ContentPage from './content/ContentPage'
+import LessonContentList from './content/LessonContentList'
 
 export default function MainContent() {
   return (
@@ -31,7 +32,10 @@ export default function MainContent() {
           <Route exact path="/categories/:id/courses/:courseId/modules/:moduleId/lessons">
             <ModuleLessonList />
           </Route>
-          <Route exact path="/categories/:id/courses/:courseId/modules/:moduleId/lessons/:contentId">
+          <Route exact path="/categories/:id/courses/:courseId/modules/:moduleId/lessons/:lessonId/contents">
+            <LessonContentList />
+          </Route>
+          <Route exact path="/categories/:id/courses/:courseId/modules/:moduleId/lessons/:lessonId/contents/:contentId">
             <ContentPage />
           </Route>
         </Switch>
