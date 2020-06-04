@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Card, PageHeader, Avatar, Empty, Spin, Space, Button } from 'antd'
 import AddCategory from './AddCategory'
 import Axios from 'axios'
+import { Link } from 'react-router-dom'
 
 export default function CategoryList() {
 
@@ -33,10 +34,11 @@ export default function CategoryList() {
               <Card style={{ margin: '8px 32px' }} >
                 <Avatar size="large" />
                 <Space>
-                  <h3 style={{ display: 'inline', marginLeft: '16px' }}>
-                    {i.title}
-                  </h3>
-
+                  <Link to={{ pathname: `/categories/${i.id}`, state: { title: i.title } }} >
+                    <h3 style={{ display: 'inline', marginLeft: '16px' }}>
+                      {i.title}
+                    </h3>
+                  </Link>
                   <Button danger
                     size="small"
                     onClick={(_) => {
