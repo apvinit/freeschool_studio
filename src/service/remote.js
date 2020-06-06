@@ -18,3 +18,7 @@ export function addCategory(data) {
 export function getCoursesByCategory(id) {
   return Axios.get(`${baseURL}/api/courses?category_id=${id}`)
 }
+
+export function getModulesByCourses(id) {
+  return Axios.get(`${baseURL}/api/modules?course_id=${id}`)
+}

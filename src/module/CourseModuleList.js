@@ -1,90 +1,56 @@
-import React from 'react'
-import { PageHeader, Card } from 'antd'
+import React, { useState, useEffect } from 'react'
+import { PageHeader, Card, Spin, Empty } from 'antd'
 import { Link, useLocation } from 'react-router-dom'
 import AddModule from './AddModule'
+import { getModulesByCourses } from '../service/remote'
 
 export default function CourseModuleList() {
 
   let location = useLocation()
+  let id = location.state.data.id
+
+  const [loading, setLoading] = useState(false)
+  const [items, setItems] = useState([])
+
+  useEffect(() => {
+    getModulesByCourses(id).then(resp => {
+      setItems(resp.data)
+      setLoading(false)
+    })
+  }, [id])
 
   return (
-    <>
-      <PageHeader title="Course Modules / Syllabus"
-        extra={<AddModule />} />
-      <Card style={{ margin: '8px 32px' }}
-        headStyle={{ fontSize: '24px' }}
-        title={<Link to={`${location.pathname}/1/lessons`}>Integers</Link>}>
-        <Card style={{ marginBottom: '8px' }}>
-          <Link to={`${location.pathname}/1/lessons/1/contents`} >
-            <h3>Addition and Subtraction of integers</h3>
-          </Link>
-        </Card>
-        <Card style={{ marginBottom: '8px' }}>
-          <Link to={`${location.pathname}/1/lessons/2/contents`} >
-            <h3>Multiplication of integers</h3>
-          </Link>
-        </Card>
-        <Card style={{ marginBottom: '8px' }}>
-          <Link to={`${location.pathname}/1/lessons/3/contents`} >
-            <h3>Addition and Subtraction of integers</h3>
-          </Link>
-        </Card>
-        <Card style={{ marginBottom: '8px' }}>
-          <Link to={`${location.pathname}/1/lessons/5/contents`} >
-            <h3>Addition and Subtraction of integers</h3>
-          </Link>
-        </Card>
-      </Card>
-
-      <Card style={{ margin: '8px 32px' }}
-        headStyle={{ fontSize: '24px' }}
-        title={<Link to={`${location.pathname}/2/lessons`}>Calculus</Link>}>
-        <Card style={{ marginBottom: '8px' }}>
-          <Link to={`${location.pathname}/1/lessons/4/contents`} >
-            <h3>Addition and Subtraction of integers</h3>
-          </Link>
-        </Card>
-        <Card style={{ marginBottom: '8px' }}>
-          <Link to={`${location.pathname}/1/lessons/4/contents`} >
-            <h3>Multiplication of integers</h3>
-          </Link>
-        </Card>
-        <Card style={{ marginBottom: '8px' }}>
-          <Link to={`${location.pathname}/1/lessons/4/contents`} >
-            <h3>Addition and Subtraction of integers</h3>
-          </Link>
-        </Card>
-        <Card style={{ marginBottom: '8px' }}>
-          <Link to={`${location.pathname}/1/lessons/5/contents`} >
-            <h3>Addition and Subtraction of integers</h3>
-          </Link>
-        </Card>
-      </Card>
-
-      <Card style={{ margin: '8px 32px' }}
-        headStyle={{ fontSize: '24px' }}
-        title={<Link to={`${location.pathname}/3/lessons`}>Geometry</Link>}>
-        <Card style={{ marginBottom: '8px' }}>
-          <Link to={`${location.pathname}/1/lessons/4/contents`} >
-            <h3>Addition and Subtraction of integers</h3>
-          </Link>
-        </Card>
-        <Card style={{ marginBottom: '8px' }}>
-          <Link to={`${location.pathname}/1/lessons/4/contents`} >
-            <h3>Multiplication of integers</h3>
-          </Link>
-        </Card>
-        <Card style={{ marginBottom: '8px' }}>
-          <Link to={`${location.pathname}/1/lessons/4/contents`} >
-            <h3>Addition and Subtraction of integers</h3>
-          </Link>
-        </Card>
-        <Card style={{ marginBottom: '8px' }}>
-          <Link to={`${location.pathname}/1/lessons/5/contents`} >
-            <h3>Addition and Subtraction of integers</h3>
-          </Link>
-        </Card>
-      </Card>
-    </>
+    loading
+      ? <div style={{ textAlign: 'center', margin: '50px', padding: '50px' }}>
+        <Spin />
+      </div>
+      :
+      <>
+        <PageHeader title={`${location.state.data.title}`}
+          extra={<AddModule />} />
+        {
+          items.length !== 0
+            ? (
+              items.map(i =>
+                <React.Fragment key={i.id}>
+                  <Card style={{ margin: '8px 32px' }}
+                    headStyle={{ fontSize: '24px' }}
+                    title={<Link to={`${location.pathname}/${i.id}/lessons`}>{i.title}</Link>}>
+                    <Card style={{ marginBottom: '8px' }}>
+                      <Link to={`${location.pathname}/${i.id}/lessons/1/contents`} >
+                        <h3>Addition and Subtraction of integers</h3>
+                      </Link>
+                    </Card>
+                    <Card style={{ marginBottom: '8px' }}>
+                      <Link to={`${location.pathname}/1/lessons/2/contents`} >
+                        <h3>Multiplication of integers</h3>
+                      </Link>
+                    </Card>
+                  </Card>
+                </React.Fragment>)
+            )
+            : <Empty />
+        }
+      </>
   )
 }
