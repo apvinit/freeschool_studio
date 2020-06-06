@@ -36,7 +36,7 @@ export default function CategoryList() {
               <Card style={{ margin: '8px 32px' }} >
                 <Avatar size="large" />
                 <Space>
-                  <Link to={{ pathname: `/categories/${i.id}/courses`, state: { title: i.title } }} >
+                  <Link to={{ pathname: `/categories/${i.id}/courses`, state: { title: i.title, id: i.id } }} >
                     <h3 style={{ display: 'inline', marginLeft: '16px' }}>
                       {i.title}
                     </h3>

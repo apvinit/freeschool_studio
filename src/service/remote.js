@@ -14,3 +14,7 @@ export function deleteCategory(id) {
 export function addCategory(data) {
   return Axios.post(`${baseURL}/api/categories`, data)
 }
+
+export function getCoursesByCategory(id) {
+  return Axios.get(`${baseURL}/api/courses?category_id=${id}`)
+}
