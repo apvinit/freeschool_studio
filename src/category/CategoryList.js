@@ -3,7 +3,7 @@ import { Card, PageHeader, Avatar, Empty, Spin, Space, Button } from 'antd'
 import { Link } from 'react-router-dom'
 
 import AddCategory from './AddCategory'
-import {deleteCategory, getCategories } from '../service/remote'
+import { deleteCategory, getCategories } from '../service/remote'
 
 export default function CategoryList() {
 
@@ -28,7 +28,8 @@ export default function CategoryList() {
       <Spin />
     </div> :
       <>
-        <PageHeader title="Categories" extra={<AddCategory />} />
+        <PageHeader title="Categories" 
+        extra={<AddCategory onAdded={() => _fetchData()} />} />
         {items.length !== 0 ?
           (
             items.map(i => <React.Fragment key={i.id}>

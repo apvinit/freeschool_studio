@@ -4,7 +4,7 @@ import Form from 'antd/lib/form/Form'
 
 import { addCategory } from '../service/remote'
 
-export default function AddCategory() {
+export default function AddCategory(props) {
   const [showModal, setShowModal] = useState(false)
   const [title, setTitle] = useState('')
 
@@ -22,12 +22,12 @@ export default function AddCategory() {
     }
 
     const data = {
-      id: Math.floor(Math.random() * 100),
       title: title
     }
     await addCategory(data)
-    setShowModal(false)
     resetState()
+    setShowModal(false)
+    props.onAdded()
   }
 
   function resetState() {
