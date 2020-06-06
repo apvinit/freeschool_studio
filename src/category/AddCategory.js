@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Button, Modal, Input, message } from 'antd'
-import axios from 'axios'
 import Form from 'antd/lib/form/Form'
+
+import { addCategory } from '../service/remote'
 
 export default function AddCategory() {
   const [showModal, setShowModal] = useState(false)
@@ -24,7 +25,7 @@ export default function AddCategory() {
       id: Math.floor(Math.random() * 100),
       title: title
     }
-    await axios.post("https://api.freeschool.org.in/api/categories", data)
+    await addCategory(data)
     setShowModal(false)
     resetState()
   }

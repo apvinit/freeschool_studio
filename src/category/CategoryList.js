@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Card, PageHeader, Avatar, Empty, Spin, Space, Button } from 'antd'
-import AddCategory from './AddCategory'
-import Axios from 'axios'
 import { Link } from 'react-router-dom'
+
+import AddCategory from './AddCategory'
+import {deleteCategory, getCategories } from '../service/remote'
 
 export default function CategoryList() {
 
@@ -14,7 +15,7 @@ export default function CategoryList() {
   }, [])
 
   function _fetchData() {
-    Axios.get('https://api.freeschool.org.in/api/categories')
+    getCategories()
       .then(resp => {
         setItems(resp.data)
         setLoading(false)
@@ -42,8 +43,7 @@ export default function CategoryList() {
                   <Button danger
                     size="small"
                     onClick={(_) => {
-                      Axios.delete(`https://api.freeschool.org.in/api/categories/${i.id}`)
-                        .then(_ => _fetchData())
+                      deleteCategory(i.id).then(_ => _fetchData())
                     }}>Delete</Button>
 
                 </Space>
