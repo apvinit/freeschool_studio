@@ -1,17 +1,41 @@
 import React, { useState } from 'react'
-import { Button } from 'antd'
+import { Button, Input } from 'antd'
 import Modal from 'antd/lib/modal/Modal'
+import Form from 'antd/lib/form/Form'
+import { addLesson } from '../service/remote'
 
-export default function AddLesson() {
+export default function AddLesson(props) {
 
   const [showModal, setShowModal] = useState(false)
+  const [title, setTitle] = useState('')
 
-  let onOk = () => {
+  let onOk = async () => {
+    if (!validateFields()) {
+      return
+    }
+    const data = {
+      title,
+      moduleID: props.moduleID
+    }
+    await addLesson(data)
+    resetState()
     setShowModal(false)
+    props.onAdded()
   }
 
   let onCancel = () => {
     setShowModal(false)
+  }
+
+  function validateFields() {
+    if (title.length < 3) {
+      return false
+    }
+    return true
+  }
+
+  function resetState() {
+    setTitle('')
   }
 
   return (
@@ -26,7 +50,10 @@ export default function AddLesson() {
         onCancel={onCancel}
       >
 
-        add some lessons related input here
+        <Form>
+          <Input placeholder="Title" size="large"
+            value={title} onChange={e => setTitle(e.target.value)} />
+        </Form>
       </Modal>
     </>
   )

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { PageHeader, Card, List, Spin, Empty } from 'antd'
+import { PageHeader, Card, List, Spin, Empty, Button } from 'antd'
 import { Link, useLocation } from 'react-router-dom'
 import AddLesson from './AddLesson'
-import { getLessonsByModules } from '../service/remote'
+import { getLessonsByModules, deleteLesson } from '../service/remote'
 
 export default function ModuleLessonList() {
   let location = useLocation()
@@ -18,6 +18,13 @@ export default function ModuleLessonList() {
     })
   }, [id])
 
+  function _fetchData() {
+    getLessonsByModules(id).then(resp => {
+      setItems(resp.data)
+      setLoading(false)
+    })
+  }
+
 
   return (
     loading
@@ -25,7 +32,8 @@ export default function ModuleLessonList() {
         <Spin />
       </div>
       : <>
-        <PageHeader title={`${location.state.data.title}`} extra={<AddLesson />} />
+        <PageHeader title={`${location.state.data.title}`}
+          extra={<AddLesson moduleID={id} onAdded={() => _fetchData()} />} />
 
         {items.length !== 0
           ? (
@@ -33,6 +41,10 @@ export default function ModuleLessonList() {
               <React.Fragment key={i.id}>
                 <Card style={{ margin: '8px 32px' }}
                   title={<Link to={{ pathname: `${location.pathname}/${i.id}/contents`, state: { data: i } }}>{i.title}</Link>}
+                  extra={<Button
+                    size="small" danger
+                    onClick={() => deleteLesson(i.id).then(_ => _fetchData())}
+                  >Delete</Button>}
                 >
                   {/* <List>
                     <Link to={`${location.pathname}/1/contents/22`}>
