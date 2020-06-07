@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { PageHeader, Card, Spin, Empty } from 'antd'
+import { PageHeader, Card, Spin, Empty, Button } from 'antd'
 import { Link, useLocation } from 'react-router-dom'
 import AddModule from './AddModule'
-import { getModulesByCourses } from '../service/remote'
+import { getModulesByCourses, deleteModule } from '../service/remote'
 
 export default function CourseModuleList() {
 
@@ -19,6 +19,13 @@ export default function CourseModuleList() {
     })
   }, [id])
 
+  function _fetchData() {
+    getModulesByCourses(id).then(resp => {
+      setItems(resp.data)
+      setLoading(false)
+    })
+  }
+
   return (
     loading
       ? <div style={{ textAlign: 'center', margin: '50px', padding: '50px' }}>
@@ -27,7 +34,7 @@ export default function CourseModuleList() {
       :
       <>
         <PageHeader title={`${location.state.data.title}`}
-          extra={<AddModule />} />
+          extra={<AddModule courseID={id} onAdded={() => _fetchData()} />} />
         {
           items.length !== 0
             ? (
@@ -35,6 +42,13 @@ export default function CourseModuleList() {
                 <React.Fragment key={i.id}>
                   <Card style={{ margin: '8px 32px' }}
                     headStyle={{ fontSize: '24px' }}
+                    extra={
+                      <Button danger
+                        size="small"
+                        onClick={() => {
+                          deleteModule(i.id).then(_ => _fetchData())
+                        }}>Delete</Button>
+                    }
                     title={<Link to={{
                       pathname: `${location.pathname}/${i.id}/lessons`,
                       state: { data: i }

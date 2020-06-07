@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import Form from 'antd/lib/form/Form'
 import { Button, Input } from 'antd'
 import Modal from 'antd/lib/modal/Modal'
+import { addModule } from '../service/remote'
 
-export default function AddModule() {
+export default function AddModule(props) {
   const [showModal, setShowModal] = useState('')
   const [title, setTitle] = useState('')
 
@@ -13,12 +14,28 @@ export default function AddModule() {
   }
 
   let onOk = async () => {
-    setShowModal(false)
+    if (!validateFields()) {
+      return
+    }
+    const data = {
+      title,
+      courseID: props.courseID
+    }
+    await addModule(data)
     resetState()
+    setShowModal(false)
+    props.onAdded()
+  }
+
+  function validateFields() {
+    if (title.length < 3) {
+      return false
+    }
+    return true
   }
 
   function resetState() {
-
+    setTitle('')
   }
 
   return (
