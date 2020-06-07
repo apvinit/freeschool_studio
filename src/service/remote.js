@@ -19,6 +19,10 @@ export function getCoursesByCategory(id) {
   return Axios.get(`${baseURL}/api/courses?category_id=${id}`)
 }
 
+export function addCourse(data) {
+  return Axios.post(`${baseURL}/api/courses`, data)
+}
+
 export function getModulesByCourses(id) {
   return Axios.get(`${baseURL}/api/modules?course_id=${id}`)
 }

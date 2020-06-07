@@ -34,7 +34,11 @@ export default function CategoryCourseList() {
       </div>
       :
       <>
-        <PageHeader title={title} extra={<AddCourse onAdded={() => _fetchData()} />} />
+        <PageHeader title={title} extra=
+          {<AddCourse 
+            categoryID={id}
+            onAdded={() => _fetchData()} />}
+        />
         {
           items.length !== 0
             ? (
@@ -42,7 +46,7 @@ export default function CategoryCourseList() {
                 <Card style={{ margin: '8px 32px' }} >
                   <Avatar size="large" />
                   <Space>
-                    <Link to={{pathname: `${location.pathname}/${i.id}/modules`, state: {data: i}}}>
+                    <Link to={{ pathname: `${location.pathname}/${i.id}/modules`, state: { data: i } }}>
                       <h3
                         style={{ display: 'inline', marginLeft: '16px' }}>
                         {i.title}
