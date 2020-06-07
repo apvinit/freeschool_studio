@@ -1,24 +1,48 @@
-import React from 'react'
-import { Card, List } from 'antd'
+import React, { useState, useEffect } from 'react'
+import { Card, List, Spin, Empty } from 'antd'
 import { Link, useLocation } from 'react-router-dom'
+import { getContentsByLesson } from '../service/remote'
 
 export default function LessonContentList() {
   let location = useLocation()
-  return (
-    <>
-      <Card
-        title="Addition of integers"
-      >
-        <List>
-          <Link to={`${location.pathname}/12`}>
-            <List.Item> Adding number with different signs</List.Item>
-          </Link>
-          <Link to={`${location.pathname}/13`}>
-            <List.Item>Subtraction number with same signs</List.Item>
-          </Link>
-        </List>
+  const id = location.state.data.id
 
-      </Card>
-    </>
+  const [loading, setLoading] = useState(false)
+  const [items, setItems] = useState([])
+
+  useEffect(() => {
+    getContentsByLesson(id).then(resp => {
+      setItems(resp.data)
+      setLoading(false)
+    })
+  }, [id])
+
+  return (
+    loading
+      ? <div style={{ textAlign: 'center', margin: '50px', padding: '50px' }}>
+        <Spin />
+      </div>
+      : <>
+        <Card
+          title={location.state.data.title}
+        >
+          {
+            items.length !== 0 ?
+
+              (
+                <List>
+                  {items.map(i =>
+                    <React.Fragment key={i.id}>
+                      <Link to={{ pathname: `${location.pathname}/${i.id}`, state: { data: i } }}>
+                        <List.Item> {i.title}</List.Item>
+                      </Link>
+                    </React.Fragment>)}
+                </List>
+              )
+              :
+              <Empty />
+          }
+        </Card>
+      </>
   )
 }

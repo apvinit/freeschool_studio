@@ -32,7 +32,7 @@ export default function ModuleLessonList() {
             items.map(i =>
               <React.Fragment key={i.id}>
                 <Card style={{ margin: '8px 32px' }}
-                  title={<Link to={`${location.pathname}/${i.id}/contents`}>{i.title}</Link>}
+                  title={<Link to={{ pathname: `${location.pathname}/${i.id}/contents`, state: { data: i } }}>{i.title}</Link>}
                 >
                   {/* <List>
                     <Link to={`${location.pathname}/1/contents/22`}>

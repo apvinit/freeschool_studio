@@ -26,3 +26,7 @@ export function getModulesByCourses(id) {
 export function getLessonsByModules(id) {
   return Axios.get(`${baseURL}/api/lessons?module_id=${id}`)
 }
+
+export function getContentsByLesson(id) {
+  return Axios.get(`${baseURL}/api/contents?lesson_id=${id}`)
+}
