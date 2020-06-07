@@ -35,8 +35,11 @@ export default function CourseModuleList() {
                 <React.Fragment key={i.id}>
                   <Card style={{ margin: '8px 32px' }}
                     headStyle={{ fontSize: '24px' }}
-                    title={<Link to={`${location.pathname}/${i.id}/lessons`}>{i.title}</Link>}>
-                    <Card style={{ marginBottom: '8px' }}>
+                    title={<Link to={{
+                      pathname: `${location.pathname}/${i.id}/lessons`,
+                      state: { data: i }
+                    }}>{i.title}</Link>}>
+                    {/* <Card style={{ marginBottom: '8px' }}>
                       <Link to={`${location.pathname}/${i.id}/lessons/1/contents`} >
                         <h3>Addition and Subtraction of integers</h3>
                       </Link>
@@ -45,7 +48,7 @@ export default function CourseModuleList() {
                       <Link to={`${location.pathname}/1/lessons/2/contents`} >
                         <h3>Multiplication of integers</h3>
                       </Link>
-                    </Card>
+                    </Card> */}
                   </Card>
                 </React.Fragment>)
             )

@@ -22,3 +22,7 @@ export function getCoursesByCategory(id) {
 export function getModulesByCourses(id) {
   return Axios.get(`${baseURL}/api/modules?course_id=${id}`)
 }
+
+export function getLessonsByModules(id) {
+  return Axios.get(`${baseURL}/api/lessons?module_id=${id}`)
+}
