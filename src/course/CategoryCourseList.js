@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { PageHeader, Card, Avatar, Space, Button, Spin, Empty } from 'antd'
 import { useLocation, Link } from 'react-router-dom'
 import AddCourse from './AddCourse'
-import { getCoursesByCategory } from '../service/remote'
+import { getCoursesByCategory, deleteCourse } from '../service/remote'
 
 export default function CategoryCourseList() {
   let location = useLocation()
@@ -35,7 +35,7 @@ export default function CategoryCourseList() {
       :
       <>
         <PageHeader title={title} extra=
-          {<AddCourse 
+          {<AddCourse
             categoryID={id}
             onAdded={() => _fetchData()} />}
         />
@@ -52,7 +52,10 @@ export default function CategoryCourseList() {
                         {i.title}
                       </h3>
                     </Link>
-                    <Button size="small">Edit</Button>
+                    {/* <Button size="small">Edit</Button> */}
+                    <Button size="small" danger onClick={() =>
+                      deleteCourse(i.id).then(_ => _fetchData())
+                    }>Delete</Button>
                   </Space>
                 </Card>
               </React.Fragment>)

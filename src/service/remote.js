@@ -23,6 +23,10 @@ export function addCourse(data) {
   return Axios.post(`${baseURL}/api/courses`, data)
 }
 
+export function deleteCourse(id) {
+  return Axios.delete(`${baseURL}/api/courses/${id}`)
+}
+
 export function getModulesByCourses(id) {
   return Axios.get(`${baseURL}/api/modules?course_id=${id}`)
 }
