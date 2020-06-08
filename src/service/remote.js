@@ -51,6 +51,14 @@ export function getLessonsByModules(id) {
   return Axios.get(`${baseURL}/api/lessons?module_id=${id}`)
 }
 
+export function addContent(data) {
+  return Axios.post(`${baseURL}/api/contents`, data)
+}
+
+export function deleteContent(id) {
+  return Axios.delete(`${baseURL}/api/contents/${id}`)
+}
+
 export function getContentsByLesson(id) {
   return Axios.get(`${baseURL}/api/contents?lesson_id=${id}`)
 }

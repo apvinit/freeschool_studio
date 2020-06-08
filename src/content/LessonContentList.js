@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Card, List, Spin, Empty } from 'antd'
 import { Link, useLocation } from 'react-router-dom'
 import { getContentsByLesson } from '../service/remote'
+import AddContent from './AddContent'
 
 export default function LessonContentList() {
   let location = useLocation()
@@ -17,6 +18,13 @@ export default function LessonContentList() {
     })
   }, [id])
 
+  function _fetchData() {
+    getContentsByLesson(id).then(resp => {
+      setItems(resp.data)
+      setLoading(false)
+    })
+  }
+
   return (
     loading
       ? <div style={{ textAlign: 'center', margin: '50px', padding: '50px' }}>
@@ -25,6 +33,8 @@ export default function LessonContentList() {
       : <>
         <Card
           title={location.state.data.title}
+          extra={<AddContent onAdded={() => _fetchData()}
+           lessonID={id}/>}
         >
           {
             items.length !== 0 ?
