@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import { Button, Upload, message, Input } from 'antd'
 import Modal from 'antd/lib/modal/Modal'
 import { UploadOutlined } from '@ant-design/icons'
-import { addContent } from '../service/remote'
+import { addContent, uploadContent } from '../service/remote'
 
 export default function AddContent(props) {
   const [showModal, setShowModal] = useState(false)
   const [title, setTitle] = useState('')
+  const [contentData, setContentData] = useState('')
 
   let onOk = async () => {
     if (title.length <= 3) {
@@ -16,6 +17,7 @@ export default function AddContent(props) {
 
     const data = {
       title,
+      data: contentData,
       lessonID: props.lessonID
     }
 
@@ -39,20 +41,18 @@ export default function AddContent(props) {
         Add Content
       </Button>
       <Modal
+        title="Add Content"
         visible={showModal}
         onOk={onOk}
         onCancel={onCancel}
         maskClosable={false}
       >
         <Upload
-          action='//jsonplaceholder.typicode.com/posts/'
-          previewFile={async (file) => {
-            return fetch('https://next.json-generator.com/api/json/get/4ytyBoLK8', {
-              method: 'POST',
-              body: file,
-            })
-              .then(res => res.json())
-              .then(({ thumbnail }) => thumbnail);
+          accept=".mp4"
+          customRequest={async (obj) => {
+            let resp = await uploadContent(obj.file)
+            setContentData(resp.data.id)
+            obj.onSuccess(resp, obj.file)
           }}
         >
           <Button>

@@ -62,3 +62,13 @@ export function deleteContent(id) {
 export function getContentsByLesson(id) {
   return Axios.get(`${baseURL}/api/contents?lesson_id=${id}`)
 }
+
+export function uploadContent(file) {
+  let data = new FormData()
+  data.append("file", file)
+  return Axios.post(`${baseURL}/api/contents/upload`, data, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+}
