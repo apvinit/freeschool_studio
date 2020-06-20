@@ -1,6 +1,6 @@
 import React from 'react'
 import { Breadcrumb } from 'antd'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route, Redirect, useLocation } from 'react-router-dom'
 import CategoryList from './category/CategoryList'
 import CategoryCourseList from './course/CategoryCourseList'
 import CourseModuleList from './module/CourseModuleList'
@@ -9,11 +9,16 @@ import ContentPage from './content/ContentPage'
 import LessonContentList from './content/LessonContentList'
 
 export default function MainContent() {
+  const location = useLocation()
+  const items = location.pathname.split("/")
   return (
     <>
       <Breadcrumb style={{ margin: '16px 0' }}>
-        <Breadcrumb.Item>Home</Breadcrumb.Item>
-        <Breadcrumb.Item>Categories</Breadcrumb.Item>
+        {
+          items.map(e => <Breadcrumb.Item key={e}>{e === '' ? 'Home' : e[0].toUpperCase() + e.slice(1)}</Breadcrumb.Item>
+          )
+        }
+
       </Breadcrumb>
       <div className="site-layout-content">
         <Switch>
