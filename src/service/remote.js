@@ -72,3 +72,19 @@ export function uploadContent(file) {
     }
   })
 }
+
+export function addLanguage(data) {
+  return Axios.post(`${baseURL}/api/lang`, data)
+}
+
+export function getLanguages() {
+  return Axios.get(`${baseURL}/api/lang`)
+}
+
+export function updateLanguage(data) {
+  return Axios.put(`${baseURL}/api/lang`, data)
+}
+
+export function deleteLanguage(id) {
+  return Axios.delete(`${baseURL}/api/lang/${id}`)
+}
