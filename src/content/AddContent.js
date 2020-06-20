@@ -10,6 +10,11 @@ export default function AddContent(props) {
   const [contentData, setContentData] = useState('')
 
   let onOk = async () => {
+    if (contentData === '') {
+      message.error("Upload the file")
+      return
+    }
+
     if (title.length <= 3) {
       message.error("At least 4 characters")
       return
@@ -34,6 +39,7 @@ export default function AddContent(props) {
 
   function resetState() {
     setTitle('')
+    setContentData('')
   }
   return (
     <>

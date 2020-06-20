@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Card, List, Spin, Empty } from 'antd'
+import { Card, List, Spin, Empty, Button, Space } from 'antd'
 import { Link, useLocation } from 'react-router-dom'
-import { getContentsByLesson } from '../service/remote'
+import { getContentsByLesson, deleteContent } from '../service/remote'
 import AddContent from './AddContent'
 
 export default function LessonContentList() {
@@ -34,7 +34,7 @@ export default function LessonContentList() {
         <Card
           title={location.state.data.title}
           extra={<AddContent onAdded={() => _fetchData()}
-           lessonID={id}/>}
+            lessonID={id} />}
         >
           {
             items.length !== 0 ?
@@ -43,9 +43,15 @@ export default function LessonContentList() {
                 <List>
                   {items.map(i =>
                     <React.Fragment key={i.id}>
-                      <Link to={{ pathname: `${location.pathname}/${i.id}`, state: { data: i } }}>
-                        <List.Item> {i.title}</List.Item>
-                      </Link>
+                      <List.Item
+                        extra={<Button danger size="small" onClick={() => {
+                          deleteContent(i.id).then(() => _fetchData())
+                        }}>
+                          Delete</Button>}>
+                        <Link to={{ pathname: `${location.pathname}/${i.id}`, state: { data: i } }}>
+                          {i.title}
+                        </Link>
+                      </List.Item>
                     </React.Fragment>)}
                 </List>
               )
