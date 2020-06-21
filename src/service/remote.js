@@ -88,3 +88,15 @@ export function updateLanguage(data) {
 export function deleteLanguage(id) {
   return Axios.delete(`${baseURL}/api/lang/${id}`)
 }
+
+export function addTag(data) {
+  return Axios.post(`${baseURL}/api/tags`, data)
+}
+
+export function getTags() {
+  return Axios.get(`${baseURL}/api/tags`)
+}
+
+export function deleteTag(id) {
+  return Axios.delete(`${baseURL}/api/tags/${id}`)
+}

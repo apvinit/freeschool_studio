@@ -8,6 +8,7 @@ import ModuleLessonList from './lesson/ModuleLessonList'
 import ContentPage from './content/ContentPage'
 import LessonContentList from './content/LessonContentList'
 import LanguageList from './language/LanguageList'
+import TagList from './tag/TagList'
 
 export default function MainContent() {
   const location = useLocation()
@@ -28,6 +29,9 @@ export default function MainContent() {
           </Route>
           <Route exact path="/categories">
             <CategoryList />
+          </Route>
+          <Route exact path="/tags">
+            <TagList />
           </Route>
           <Route exact path="/languages">
             <LanguageList />
