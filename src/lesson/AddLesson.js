@@ -8,6 +8,7 @@ export default function AddLesson(props) {
 
   const [showModal, setShowModal] = useState(false)
   const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
 
   let onOk = async () => {
     if (!validateFields()) {
@@ -15,7 +16,9 @@ export default function AddLesson(props) {
     }
     const data = {
       title,
-      module_id: props.moduleID
+      description,
+      module_id: props.moduleID,
+      draft: true
     }
     await addLesson(data)
     resetState()
@@ -36,6 +39,7 @@ export default function AddLesson(props) {
 
   function resetState() {
     setTitle('')
+    setDescription('')
   }
 
   return (
@@ -53,6 +57,9 @@ export default function AddLesson(props) {
         <Form>
           <Input placeholder="Title" size="large"
             value={title} onChange={e => setTitle(e.target.value)} />
+          <div style={{ marginBottom: '8px' }}></div>
+          <Input placeholder="Description" size="large"
+            value={description} onChange={e => setDescription(e.target.value)} />
         </Form>
       </Modal>
     </>
