@@ -100,3 +100,13 @@ export function getTags() {
 export function deleteTag(id) {
   return Axios.delete(`${baseURL}/api/tags/${id}`)
 }
+
+export function uploadMedia(file) {
+  let data = new FormData()
+  data.append("file", file)
+  return Axios.post(`${baseURL}/api/upload`, data, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+}

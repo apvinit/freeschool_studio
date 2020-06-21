@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
-import { Button, Modal, Input, message } from 'antd'
+import { Button, Modal, Input, message, Upload } from 'antd'
 import Form from 'antd/lib/form/Form'
 
-import { addCategory } from '../service/remote'
+import { addCategory, uploadMedia } from '../service/remote'
+import { UploadOutlined } from '@ant-design/icons'
 
 export default function AddCategory(props) {
   const [showModal, setShowModal] = useState(false)
   const [title, setTitle] = useState('')
+  const [cover, setCover] = useState('')
+  const [lang, setLang] = useState('')
 
   let onCancel = () => {
     setShowModal(false)
@@ -22,7 +25,9 @@ export default function AddCategory(props) {
     }
 
     const data = {
-      title: title
+      title,
+      cover,
+      lang
     }
     await addCategory(data)
     resetState()
@@ -32,6 +37,7 @@ export default function AddCategory(props) {
 
   function resetState() {
     setTitle('')
+    setLang('')
   }
 
   return (
@@ -40,10 +46,28 @@ export default function AddCategory(props) {
       <Modal title="Add Category"
         visible={showModal}
         onOk={onOk}
-        onCancel={onCancel}>
+        onCancel={onCancel}
+        destroyOnClose={true}
+        >
         <Form>
+          <Upload
+            accept="image/*"
+            customRequest={async (obj) => {
+              let resp = await uploadMedia(obj.file)
+              setCover(resp.data.id)
+              obj.onSuccess(resp, obj.file)
+            }}
+          >
+            <Button>
+              <UploadOutlined />
+              Upload
+            </Button>
+          </Upload>
+          <br />
           <Input placeholder="Title" size="large"
-            value={title} onChange={e => setTitle(e.target.value)} />
+            value={title} onChange={e => setTitle(e.target.value)} /> <br/><br/>
+          <Input placeholder="Language" size="large"
+            value={lang} onChange={e => setLang(e.target.value)} />
         </Form>
       </Modal>
     </>
