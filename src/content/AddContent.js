@@ -23,7 +23,7 @@ export default function AddContent(props) {
     const data = {
       title,
       data: contentData,
-      lessonID: props.lessonID
+      lesson_id: props.lessonID
     }
 
     await addContent(data)

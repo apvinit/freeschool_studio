@@ -15,7 +15,7 @@ export default function AddLesson(props) {
     }
     const data = {
       title,
-      moduleID: props.moduleID
+      module_id: props.moduleID
     }
     await addLesson(data)
     resetState()

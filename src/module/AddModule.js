@@ -19,7 +19,7 @@ export default function AddModule(props) {
     }
     const data = {
       title,
-      courseID: props.courseID
+      course_id: props.courseID
     }
     await addModule(data)
     resetState()
