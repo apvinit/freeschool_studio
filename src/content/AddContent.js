@@ -7,6 +7,8 @@ import { addContent, uploadContent } from '../service/remote'
 export default function AddContent(props) {
   const [showModal, setShowModal] = useState(false)
   const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [type, setType] = useState('')
   const [contentData, setContentData] = useState('')
 
   let onOk = async () => {
@@ -22,8 +24,11 @@ export default function AddContent(props) {
 
     const data = {
       title,
+      description,
       data: contentData,
-      lesson_id: props.lessonID
+      content_type: type,
+      lesson_id: props.lessonID,
+      draft: true
     }
 
     await addContent(data)
@@ -54,7 +59,7 @@ export default function AddContent(props) {
         maskClosable={false}
       >
         <Upload
-          accept=".mp4"
+          accept="video/*"
           customRequest={async (obj) => {
             let resp = await uploadContent(obj.file)
             setContentData(resp.data.id)
@@ -65,8 +70,12 @@ export default function AddContent(props) {
             <UploadOutlined /> Upload
           </Button>
         </Upload>
-
+        <div style={{ marginBottom: '8px' }}></div>
+        <Input placeholder="Type" size="large" value={type} onChange={e => setType(e.target.value)} />
+        <div style={{ marginBottom: '8px' }}></div>
         <Input placeholder="Title" size="large" value={title} onChange={e => setTitle(e.target.value)} />
+        <div style={{ marginBottom: '8px' }}></div>
+        <Input placeholder="Description" size="large" value={description} onChange={e => setDescription(e.target.value)} />
       </Modal>
     </>
   )
