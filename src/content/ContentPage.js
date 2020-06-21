@@ -1,7 +1,7 @@
 import React from 'react'
 import { PageHeader, Card } from 'antd'
 import { useLocation } from 'react-router-dom'
-import { baseURL } from '../service/remote'
+import { getStreamUrl } from '../service/remote'
 import VideoPlayer from 'react-video-js-player';
 
 export default function ContentPage() {
@@ -14,7 +14,7 @@ export default function ContentPage() {
       <Card>
         <VideoPlayer
           controls={true}
-          src={`${baseURL}/api/contents/stream/${location.state.data.data}/index.m3u8`}
+          src={getStreamUrl(location.state.data.data)}
           width="720"
           height="420"
         />

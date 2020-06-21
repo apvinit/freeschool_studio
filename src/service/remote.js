@@ -73,6 +73,10 @@ export function uploadContent(file) {
   })
 }
 
+export function getStreamUrl(name) {
+  return `${baseURL}/api/contents/stream/${name}/index.m3u8`
+}
+
 export function addLanguage(data) {
   return Axios.post(`${baseURL}/api/lang`, data)
 }
@@ -109,4 +113,8 @@ export function uploadMedia(file) {
       'Content-Type': 'multipart/form-data'
     }
   })
+}
+
+export function getMediaUrl(file) {
+  return `${baseURL}/api/uploads/${file}`
 }

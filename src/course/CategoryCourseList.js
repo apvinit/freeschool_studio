@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { PageHeader, Card, Avatar, Space, Button, Spin, Empty } from 'antd'
 import { useLocation, Link } from 'react-router-dom'
 import AddCourse from './AddCourse'
-import { getCoursesByCategory, deleteCourse } from '../service/remote'
+import { getCoursesByCategory, deleteCourse, getMediaUrl } from '../service/remote'
 
 export default function CategoryCourseList() {
   let location = useLocation()
@@ -44,7 +44,7 @@ export default function CategoryCourseList() {
             ? (
               items.map(i => <React.Fragment key={i.id}>
                 <Card style={{ margin: '8px 32px' }} >
-                  <Avatar size="large" />
+                  <Avatar size="large" src={getMediaUrl(i.cover)}/>
                   <Space>
                     <Link to={{ pathname: `${location.pathname}/${i.id}/modules`, state: { data: i } }}>
                       <h3

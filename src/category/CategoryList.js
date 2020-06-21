@@ -3,7 +3,7 @@ import { Card, PageHeader, Avatar, Empty, Spin, Space, Button } from 'antd'
 import { Link } from 'react-router-dom'
 
 import AddCategory from './AddCategory'
-import { deleteCategory, getCategories } from '../service/remote'
+import { deleteCategory, getCategories, getMediaUrl } from '../service/remote'
 
 export default function CategoryList() {
 
@@ -34,7 +34,7 @@ export default function CategoryList() {
           (
             items.map(i => <React.Fragment key={i.id}>
               <Card style={{ margin: '8px 32px' }} >
-                <Avatar size="large" />
+                <Avatar size="large" src={getMediaUrl(i.cover)}/>
                 <Space>
                   <Link to={{ pathname: `/categories/${i.id}/courses`, state: { title: i.title, id: i.id } }} >
                     <h3 style={{ display: 'inline', marginLeft: '16px' }}>
