@@ -20,7 +20,7 @@ export default function AddCourse(props) {
     }
     const data = {
       title,
-      categoryID: props.categoryID
+      category_id: props.categoryID
     }
     await addCourse(data)
     resetState()
